@@ -42,30 +42,6 @@
       :dates="getDates"
       :results="getData('max_heartrate')"
     />
-
-    <div class="bg-orange-200 p-4">Achievement Count 🏅: {{ activities[0].achievement_count }}</div>
-    <div class="bg-orange-200 p-4">
-      Average Heart Rate 🫀: {{ activities[0].average_heartrate }} BPM
-    </div>
-    <div class="bg-orange-200 p-4">
-      Average Speed ⏱️: {{ metersPerSecondToMph(activities[0].average_speed) }} MPH
-    </div>
-    <div class="bg-orange-200 p-4">
-      Distance 🚴: {{ convertMetersToMiles(activities[0].distance) }} Miles
-    </div>
-    <div class="bg-orange-200 p-4">Max Heart Rate 💗: {{ activities[0].max_heartrate }} BPM</div>
-    <div class="bg-orange-200 p-4">
-      Max Speed 💨: {{ metersPerSecondToMph(activities[0].max_speed) }} MPH
-    </div>
-    <div class="bg-orange-200 p-4">
-      Moving Time ⏳: {{ convertSecondsToMinutes(activities[0].moving_time) }}
-    </div>
-    <div class="bg-orange-200 p-4">PR Count 🥇: {{ activities[0].pr_count }}</div>
-    <div class="bg-orange-200 p-4">Relative Effort 🥵: {{ activities[0].suffer_score }}</div>
-    <div class="bg-orange-200 p-4">
-      Total Elevation Gain ⛰️: {{ metersToFeet(activities[0].total_elevation_gain) }} FT
-    </div>
-    <div class="bg-orange-200 p-4">Average Watts 🔋: {{ activities[0].average_watts }}</div>
   </div>
 </template>
 

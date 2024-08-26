@@ -1,7 +1,7 @@
 <template>
   <div>
     <button
-      class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+      class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
       @click="login"
     >
       Login
