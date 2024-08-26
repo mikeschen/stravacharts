@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-orange-200 p-4">
+  <div class="bg-orange-100 p-4">
     <Line :data="data" :options="options" />
   </div>
 </template>

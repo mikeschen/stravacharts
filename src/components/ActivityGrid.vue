@@ -1,27 +1,47 @@
 <template>
   <div v-if="activities.length > 0" class="grid md:grid-cols-2 grid-cols-1 gap-4">
-    <LineChart title="Distance 🚴" :dates="getDates" :results="getData('distance')" />
     <LineChart
-      title="Total Elevation Gain ⛰️"
+      title="Distance 🚴 in Miles"
       :dates="getDates"
-      :results="getData('total_elevation_gain')"
+      :results="getData('distance', convertMetersToMiles)"
+    />
+    <LineChart
+      title="Total Elevation Gain ⛰️ in FT"
+      :dates="getDates"
+      :results="getData('total_elevation_gain', metersToFeet)"
     />
     <LineChart
       title="Achievement Count 🏅"
       :dates="getDates"
       :results="getData('achievement_count')"
     />
-    <LineChart title="Relative Effort 🥵" :dates="getDates" :results="getData('suffer_score')" />
-    <LineChart title="Moving Time ⏳" :dates="getDates" :results="getData('moving_time')" />
     <LineChart title="PR Count 🥇" :dates="getDates" :results="getData('pr_count')" />
-    <LineChart title="Average Speed ⏱️" :dates="getDates" :results="getData('average_speed')" />
-    <LineChart title="Max Speed 💨" :dates="getDates" :results="getData('max_speed')" />
+    <LineChart title="Relative Effort 🥵" :dates="getDates" :results="getData('suffer_score')" />
     <LineChart
-      title="Average Heart Rate 🫀"
+      title="Moving Time ⏳ in Minutes"
+      :dates="getDates"
+      :results="getData('moving_time', convertSecondsToMinutes)"
+    />
+    <LineChart
+      title="Average Speed ⏱️ in MPH"
+      :dates="getDates"
+      :results="getData('average_speed', metersPerSecondToMph)"
+    />
+    <LineChart
+      title="Max Speed 💨 in MPH"
+      :dates="getDates"
+      :results="getData('max_speed', metersPerSecondToMph)"
+    />
+    <LineChart
+      title="Average Heart Rate 🫀 in BPM"
       :dates="getDates"
       :results="getData('average_heartrate')"
     />
-    <LineChart title="Max Heart Rate 💗" :dates="getDates" :results="getData('max_heartrate')" />
+    <LineChart
+      title="Max Heart Rate 💗 in BPM"
+      :dates="getDates"
+      :results="getData('max_heartrate')"
+    />
 
     <div class="bg-orange-200 p-4">Achievement Count 🏅: {{ activities[0].achievement_count }}</div>
     <div class="bg-orange-200 p-4">
@@ -38,7 +58,7 @@
       Max Speed 💨: {{ metersPerSecondToMph(activities[0].max_speed) }} MPH
     </div>
     <div class="bg-orange-200 p-4">
-      Moving Time ⏳: {{ convertSecondsToMinutesAndSeconds(activities[0].moving_time) }}
+      Moving Time ⏳: {{ convertSecondsToMinutes(activities[0].moving_time) }}
     </div>
     <div class="bg-orange-200 p-4">PR Count 🥇: {{ activities[0].pr_count }}</div>
     <div class="bg-orange-200 p-4">Relative Effort 🥵: {{ activities[0].suffer_score }}</div>
@@ -54,7 +74,7 @@ import { onMounted, ref, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useStravaStore } from '../stores/stravaStore';
 import {
-  convertSecondsToMinutesAndSeconds,
+  convertSecondsToMinutes,
   convertMetersToMiles,
   metersPerSecondToMph,
   metersToFeet,
@@ -77,10 +97,10 @@ const getDates = computed(() => {
     .reverse();
 });
 
-function getData(key: string) {
+function getData(key: string, formatter = (value: any) => value) {
   const results = activities.value
     .map((activity) => {
-      return activity[key];
+      return formatter(activity[key]);
     })
     .reverse();
 

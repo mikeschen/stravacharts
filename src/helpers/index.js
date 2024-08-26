@@ -5,10 +5,8 @@ export const getAuthTokenFromUrl = () => {
   return token;
 };
 
-export const convertSecondsToMinutesAndSeconds = (seconds) => {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-  return `${minutes}${remainingSeconds.toString().padStart(2, '0')}`;
+export const convertSecondsToMinutes = (seconds) => {
+  return Math.floor(seconds / 60);
 };
 
 export const convertMetersToMiles = (meters) => {
@@ -33,4 +31,4 @@ export const formatDate = (dateString) => {
   });
 
   return formattedDate;
-}
+};
