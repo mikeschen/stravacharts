@@ -1,7 +1,9 @@
 <template>
   <footer className="bg-white text-gray-800 py-6">
     <div className="container mx-auto text-center">
-      <div className="mb-2 text-gray-600 text-xs">Built with Vue, Chart.js and Tailwind.</div>
+      <div className="mb-2 text-gray-600 text-xs">
+        Built with Vue, Chart.js, Tailwind and Strava.
+      </div>
       <div className="text-gray-600 text-xs">
         &copy; {{ year }} Michael Schennum. All rights reserved.
       </div>
