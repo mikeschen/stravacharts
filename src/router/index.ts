@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,14 +15,13 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue')
     }
   ]
-})
+});
 
 router.beforeEach(async (to) => {
-  const token = localStorage.getItem('access_token')
-  console.log('token 🪙', token)
+  const token = localStorage.getItem('access_token');
   if (!token && to.name !== 'login') {
-    return { name: 'login' }
+    return { name: 'login' };
   }
-})
+});
 
-export default router
+export default router;
