@@ -1,5 +1,16 @@
 <template>
-  <div v-if="activities.length > 0" class="grid md:grid-cols-2 grid-cols-1 gap-4">
+  <div v-if="!activities.length" class="container mx-auto">
+    <div class="flex flex-col md:flex-row">
+      <div class="w-full md:w-1/2 p-4">
+        <LoadingSkeleton></LoadingSkeleton>
+      </div>
+      <div class="w-full md:w-1/2 p-4">
+        <LoadingSkeleton></LoadingSkeleton>
+      </div>
+    </div>
+  </div>
+  <div v-else class="grid md:grid-cols-2 grid-cols-1 gap-4">
+    <OpenAi></OpenAi>
     <LineChart
       title="Distance 🚴 in Miles"
       :dates="getDates"
@@ -57,6 +68,8 @@ import {
   formatDate
 } from '../helpers';
 import LineChart from './LineChart.vue';
+import OpenAi from './OpenAi.vue';
+import LoadingSkeleton from './LoadingSkeleton.vue';
 
 const stravaStore = useStravaStore();
 const { activities } = storeToRefs(stravaStore);

@@ -9,8 +9,9 @@ export const useAuthStore = defineStore('auth', {
   }),
   actions: {
     async getAccessToken() {
-      // const accessToken = window.localStorage.getItem('access_token');
 
+      // Uncomment below for dev use:
+      // const accessToken = window.localStorage.getItem('access_token');
       // if (accessToken) {
       //   axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
       // } else {
@@ -26,8 +27,8 @@ export const useAuthStore = defineStore('auth', {
         });
         const responseData = authResponse.data;
         window.localStorage.setItem('access_token', responseData.access_token);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${responseData.access_token}`;
         this.token = responseData.access_token;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
         this.athlete = responseData.athlete;
       } catch (error) {
         console.log(error);
