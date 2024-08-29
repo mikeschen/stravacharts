@@ -21,8 +21,6 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const authStore = useAuthStore();
 
-  console.log('authStore.token 🤖', authStore.token);
-
   if (!authStore.token && to.name !== 'login') {
     return { name: 'login' };
   }
