@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <h1>OpenAI</h1>
-    <p>here👍: {{ main() }}</p>
-  </div>
+  <p class="text-sm pb-4">Today's Training Tip: {{ chatCompletion.choices[0].message.content }}</p>
 </template>
 
 <script setup lang="ts">
@@ -13,14 +10,10 @@ const client = new OpenAI({
   dangerouslyAllowBrowser: true
 });
 
-async function main() {
-  const chatCompletion = await client.chat.completions.create({
-    messages: [{ role: 'user', content: 'Brainstorm some ideas combining VR and fitness.' }],
-    model: 'gpt-4o-mini'
-  });
-
-  console.log('openai 🚴', chatCompletion);
-
-  return chatCompletion.choices[0].message.content;
-}
+const chatCompletion = await client.chat.completions.create({
+  messages: [
+    { role: 'user', content: 'Brainstorm some ideas for fitness. Limit it to two sentences' }
+  ],
+  model: 'gpt-4o-mini'
+});
 </script>
