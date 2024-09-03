@@ -7,6 +7,7 @@ export const useAuthStore = defineStore('auth', {
     token: null as string | null,
     athlete: null as any | null
   }),
+
   actions: {
     async getAccessToken() {
       // Uncomment below for dev use:
@@ -32,6 +33,12 @@ export const useAuthStore = defineStore('auth', {
       } catch (error) {
         console.log(error);
       }
+    },
+
+    reset() {
+      this.token = null;
+      this.athlete = null;
+      axios.defaults.headers.common['Authorization'] = null;
     }
   }
 });

@@ -10,14 +10,14 @@
           </div>
           <div class="sm:ml-6 sm:block">
             <div class="flex space-x-4">
-              <a
+              <button
                 v-if="athlete"
-                href="#"
                 class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
                 aria-current="page"
-                >Dashboard</a
               >
-              <Login />
+                Dashboard
+              </button>
+              <ButtonWrapper :label="token ? 'Logout' : 'Login'" @action="token ? logout() : login()" />
             </div>
           </div>
         </div>
@@ -76,10 +76,26 @@
 </template>
 
 <script setup lang="ts">
-import Login from './Login.vue';
+import ButtonWrapper from './ButtonWrapper.vue';
 import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/authStore';
 
+const router = useRouter();
 const authStore = useAuthStore();
-const { athlete } = storeToRefs(authStore);
+const { token, athlete } = storeToRefs(authStore);
+
+const login = () => {
+  const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+  const redirectUrl =
+    process.env.NODE_ENV === 'production'
+      ? 'https://stravacharts.vercel.app'
+      : 'http://localhost:5173';
+  window.location = `http://www.strava.com/oauth/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${redirectUrl}/exchange_token&approval_prompt=force&scope=read,profile:read_all,activity:read,activity:read_all`;
+};
+
+const logout = () => {
+  authStore.reset();
+  router.push({ name: 'login' });
+};
 </script>
