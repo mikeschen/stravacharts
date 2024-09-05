@@ -1,4 +1,4 @@
-# strava-vue
+# S Charts
 
 1. Create a .env file in the root of the project with this code:
 ```

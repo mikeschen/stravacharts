@@ -5,7 +5,7 @@
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex flex-shrink-0 items-center">
             <RouterLink to="/"
-              ><img class="h-4 w-auto" src="/strava_logo_charts.png" alt="Strava Charts Logo"
+              ><img class="h-4 w-auto" src="/scharts_logo_nav.png" alt="S Charts Logo"
             /></RouterLink>
           </div>
           <div class="sm:ml-6 sm:block">
@@ -17,7 +17,10 @@
               >
                 Dashboard
               </button>
-              <ButtonWrapper :label="token ? 'Logout' : 'Login'" @action="token ? logout() : login()" />
+              <ButtonWrapper
+                :label="token ? 'Logout' : 'Login'"
+                @action="token ? logout() : login()"
+              />
             </div>
           </div>
         </div>
@@ -89,9 +92,11 @@ const login = () => {
   const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
   const redirectUrl =
     process.env.NODE_ENV === 'production'
-      ? 'https://stravacharts.vercel.app'
+      ? 'https://scharts.vercel.app'
       : 'http://localhost:5173';
-  window.location = `http://www.strava.com/oauth/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${redirectUrl}/exchange_token&approval_prompt=force&scope=read,profile:read_all,activity:read,activity:read_all`;
+  const url = `http://www.strava.com/oauth/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${redirectUrl}/exchange_token&approval_prompt=force&scope=read,profile:read_all,activity:read,activity:read_all`;
+
+  window.location.href = url;
 };
 
 const logout = () => {
