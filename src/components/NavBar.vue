@@ -94,7 +94,7 @@ const login = () => {
     process.env.NODE_ENV === 'production' ? 'https://scharts.vercel.app' : 'http://localhost:5173';
   const url = `https://www.strava.com/oauth/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${redirectUrl}/exchange_token&approval_prompt=force&scope=read,profile:read_all,activity:read,activity:read_all`;
 
-  window.location = url;
+  window.location.href = url;
 };
 
 const logout = () => {
