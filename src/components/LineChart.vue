@@ -14,7 +14,8 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+	type ChartData,
 } from 'chart.js';
 import { Line } from 'vue-chartjs';
 
@@ -35,13 +36,12 @@ const props = defineProps({
   }
 });
 
-const data = {
-  title: 'Custom tooltip',
-  labels: props.dates,
+const data: ChartData<'line', number[], string> = {
+  labels: props.dates as string[],
   datasets: [
     {
       backgroundColor: '#f87979',
-      data: props.results
+      data: props.results as number[]
     }
   ]
 };
